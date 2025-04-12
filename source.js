@@ -1,19 +1,23 @@
-// Animate sections on scroll
-const fadeInElements = document.querySelectorAll('.fade-in');
+// script.js
 
-const observer = new IntersectionObserver((entries) => {
+// Reveal sections on scroll
+const sections = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
     }
   });
+}, { threshold: 0.1 });
+
+sections.forEach(section => {
+  observer.observe(section);
 });
 
-fadeInElements.forEach(el => observer.observe(el));
-
-// Handle contact form submission
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+// Contact form handler (basic alert)
+const form = document.getElementById('contactForm');
+form.addEventListener('submit', e => {
   e.preventDefault();
-  alert('Thanks for reaching out!');
-  this.reset();
+  alert('Thank you! Your message has been sent.');
+  form.reset();
 });
